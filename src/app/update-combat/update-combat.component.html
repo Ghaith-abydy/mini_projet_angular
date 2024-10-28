@@ -1,0 +1,51 @@
+<div class="container"> 
+    <div> 
+        <h2>Modifier un Combat :</h2>              
+    </div> 
+    <form>  
+        <div class="col-sm-2 col-md-2 col-lg-2"> 
+            <label>ID Combat</label> 
+            <input readonly type="text" [(ngModel)]="currentCombat.idCombat" name="idCombat" class="form-control"> 
+        </div> 
+  
+        <div class="col-sm-4 col-md-4 col-lg-4"> 
+            <label>Nom j1</label> 
+            <input type="text" [(ngModel)]="currentCombat.nomj1" name="nomj1" class="form-control"> 
+        </div>
+  
+        <div class="col-sm-4 col-md-4 col-lg-4"> 
+            <label>Nom j2</label> 
+            <input type="text" [(ngModel)]="currentCombat.nomj2" name="nomj2" class="form-control"> 
+        </div> 
+  
+        <div class="col-sm-2 col-md-2 col-lg-2"> 
+            <label>Score j1</label> 
+            <input type="number" [(ngModel)]="currentCombat.scorej1" name="scorej1" class="form-control"> 
+        </div>
+  
+        <div class="col-sm-2 col-md-2 col-lg-2"> 
+            <label>Score j2</label> 
+            <input type="number" [(ngModel)]="currentCombat.scorej2" name="scorej2" class="form-control"> 
+        </div> 
+  
+        <div class="col-sm-4 col-md-4 col-lg-4"> 
+            <label >Date création</label> 
+            <input  type="date"  [ngModel]="currentCombat.dateCombat | date: 'yyyy-MM-dd'"  
+            (ngModelChange)=" currentCombat.dateCombat= $event"   name="dateCombat"  
+            class="form-control"> 
+            </div>
+            <!-- <div class="col-sm-4 col-md-4 col-lg-4">
+                <label>Categorie</label>
+                <select class="form-control form-control-lg" id="idCat" name="idCat" [(ngModel)]="updatedCatId">
+                    <option *ngFor="let cat of categories" [value]="cat.idCat">
+                        {{cat.nomCat}}
+                    </option>
+                </select>
+            </div> -->
+  
+        <div class="mt-2"> 
+            <button type="button" (click)="updateCombat()" class="btn btn-success">Modifier</button>
+        </div>    
+    </form> 
+  </div>
+  

@@ -1,0 +1,24 @@
+<div class="container"> 
+    <div class="card shadow mb-4">                    
+      <div class="card-body">  
+       <table  class="table table-striped"> 
+              <thead>  
+                <tr> <th>Id</th><th>Nom j1</th> <th>Nom j2</th> <th>Score j1</th> <th>Score j2</th>  <th>Date Combat</th><th></th> <th></th></tr> 
+                </thead>                                
+                <tbody *ngFor="let c of combats"> 
+                         <tr > 
+                            <td>{{c.idCombat}}</td> 
+                            <td>{{c.nomj1}}</td> 
+                            <td>{{c.nomj2}}</td> 
+                            <td>{{c.scorej1}}</td> 
+                            <td>{{c.scorej2}}</td> 
+                            <td>{{c.dateCombat  | date:'dd/MM/yyyy'}}</td>
+                            <!-- <td>{{c.categorie.nomCat}}</td>  -->
+                            <td><a class="btn btn-danger" (click)="supprimerCombat(c)">Supprimer</a></td>
+                            <td><a class="btn btn-success" [routerLink]="['/updateCombat',c.idCombat]">Modifier</a></td> 
+                          </tr>                                     
+                </tbody> 
+      </table> 
+      </div> 
+    </div> 
+  </div>
