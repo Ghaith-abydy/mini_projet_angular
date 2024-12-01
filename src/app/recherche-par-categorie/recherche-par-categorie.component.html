@@ -1,4 +1,18 @@
 <div class="container"> 
+    <div class="col-sm-4 col-md-4 col-lg-4 mb-4">
+        <label>Categories </label>
+        <select class="form-control form-control-lg" id="idCat" name="idCat" [(ngModel)]="IdCategorie"
+            (change)="onChange()">
+            <option *ngFor="let cat of categories" value="{{cat.idCat}}">
+                {{cat.nomCat}}
+            </option>
+        </select>
+    </div>
+
+
+
+
+
     <div class="card shadow mb-4">                    
       <div class="card-body">  
        <table  class="table table-striped"> 
@@ -14,8 +28,8 @@
                             <td>{{c.scorej2}}</td> 
                             <td>{{c.dateCombat  | date:'dd/MM/yyyy'}}</td>
                             <td>{{c.categorie!.nomCat}}</td>
-                            <td><a *ngIf="authService.isAdmin()" class="btn btn-danger" (click)="supprimerCombat(c)">Supprimer</a></td>
-                            <td><a *ngIf="authService.isAdmin()" class="btn btn-success" [routerLink]="['/updateCombat',c.idCombat]">Modifier</a></td> 
+                            <!-- <td><a class="btn btn-danger" (click)="supprimerCombat(c)">Supprimer</a></td>
+                            <td><a class="btn btn-success" [routerLink]="['/updateCombat',c.idCombat]">Modifier</a></td>  -->
                           </tr>                                     
                 </tbody> 
       </table> 

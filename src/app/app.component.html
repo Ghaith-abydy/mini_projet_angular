@@ -1,45 +1,93 @@
-<!DOCTYPE html> 
-<html > 
-<head> 
-<meta charset="utf-8"> 
-<title>Gestion des Combats</title> 
-</head> 
-<body> 
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark"> 
-  <!-- Brand --> 
-  <a class="navbar-brand" href="#">Gestion Combats</a> 
- 
-  <!-- Links --> 
-  <ul class="navbar-nav"> 
-    <li class="nav-item"> 
-      <a class="nav-link" href="#" >Home</a> 
-    </li> 
- 
-    <!-- Dropdown --> 
-    <li class="nav-item dropdown"> 
-<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown"> 
-        Combats 
-      </a> 
-      <div class="dropdown-menu"> 
-        <a class="dropdown-item"  routerLink="/add-combat">Ajouter</a> 
-        <a class="dropdown-item"  href="#">Lister</a> 
-      </div> 
-    </li> 
-    </ul> 
-     
-    <ul class="navbar-nav ml-auto" >  
-     <li class="nav-item dropdown"> 
-<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown"> 
-      [username] 
-      </a> 
-      <div class="dropdown-menu"> 
-        <a class="dropdown-item" href="#">login</a> 
-        <a class="dropdown-item" href="#">logout</a> 
-          <a class="dropdown-item" href="#">Profile</a> 
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Gestion des Combats</title>
+  <style>
+    /* Styles de base pour le menu de navigation */
+    .navbar {
+      display: flex;
+      background-color: #333;
+      padding: 10px;
+    }
+    
+    .navbar a {
+      color: white;
+      padding: 8px 16px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .navbar a:hover {
+      background-color: #575757;
+    }
+
+    .navbar .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #333;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+    }
+
+    .dropdown-content a {
+      color: white;
+      padding: 8px 16px;
+      display: block;
+      text-align: left;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #575757;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .navbar .right {
+      margin-left: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar">
+    <!-- Brand -->
+    <a href="#">Gestion Combats</a>
+
+    <!-- Links -->
+    <div class="dropdown">
+      <a href="#">Combats</a>
+      <div class="dropdown-content">
+        <a *ngIf="authService.isAdmin()" routerLink="add-combat">Ajouter</a>
+        <a routerLink="combats">Lister</a>
+        <a routerLink="/rechercheParCategorie" >Recherche Par Catégorie</a>
+        <a  routerLink="/rechercheParNom" >Recherche Par Nom</a>
+        <a routerLink="/listeCategories" >Gestion des catégories</a> 
+
+
       </div>
-    </li> 
-  </ul> 
-  </nav> 
-  </body> 
-  </html> 
-      <router-outlet><router-outlet />
+    </div>
+
+    <!-- User Dropdown (Right aligned) -->
+    <div class="dropdown right">
+      <li> <a class="nav-link">{{authService.loggedUser}}</a></li>
+      <a href="#">Connexion</a>
+      <div class="dropdown-content">
+        <a *ngIf="!authService.isloggedIn"  routerLink="/login">Login</a>
+        <a *ngIf="authService.isloggedIn"  (click) = "onLogout()">Logout</a>
+        <a href="#">Profile</a>
+      </div>
+    </div>
+  </nav>
+
+  <router-outlet></router-outlet>
+</body>
+</html>

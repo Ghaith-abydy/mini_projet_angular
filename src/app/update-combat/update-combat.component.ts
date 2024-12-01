@@ -17,18 +17,22 @@ export class UpdateCombatComponent implements OnInit {
     private router :Router, 
     private combatService: CombatService){}
   ngOnInit(): void {
-    //console.log(this.activatedRoute.snapshot.params['id']);
-    // this.categories = this.combatService.listeCategories(); 
-    this.currentCombat = this.combatService.consulterCombat(this.activatedRoute.snapshot.params['id']);
-    this.updatedCatId=this.currentCombat.categorie.idCat;
+    this.combatService.listeCategories(). 
+    subscribe(cats => {this.categories = cats._embedded.categories; 
+                       console.log(cats); 
+   }); 
+      this.combatService.consulterCombat(this.activatedRoute.snapshot.params['id']). subscribe( prod =>{ this.currentCombat = prod;
+        this.updatedCatId = this.currentCombat.categorie.idCat; 
+       } ) ;
+      this.updatedCatId = this.currentCombat.categorie.idCat;  
     
   }
 
   updateCombat(){
-    //console.log(this.currentCombat);
-    // this.currentCombat.categorie=this.combatService.consulterCategorie(this.updatedCatId); 
-    this.combatService.updateCombat(this.currentCombat);
-    this.router.navigate(["combats"]);
+    this.currentCombat.categorie = this.categories.find(cat => cat.idCat == this.updatedCatId)!; 
+    this.combatService.updateCombat(this.currentCombat).subscribe(comb => { 
+      this.router.navigate(['combats']); }  
+      ); 
   }
 
 

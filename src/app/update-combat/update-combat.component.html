@@ -3,7 +3,7 @@
         <h2>Modifier un Combat :</h2>              
     </div> 
     <form>  
-        <div class="col-sm-2 col-md-2 col-lg-2"> 
+        <div readonly class="col-sm-2 col-md-2 col-lg-2"> 
             <label>ID Combat</label> 
             <input readonly type="text" [(ngModel)]="currentCombat.idCombat" name="idCombat" class="form-control"> 
         </div> 
@@ -34,14 +34,14 @@
             (ngModelChange)=" currentCombat.dateCombat= $event"   name="dateCombat"  
             class="form-control"> 
             </div>
-            <!-- <div class="col-sm-4 col-md-4 col-lg-4">
+            <div class="col-sm-4 col-md-4 col-lg-4">
                 <label>Categorie</label>
                 <select class="form-control form-control-lg" id="idCat" name="idCat" [(ngModel)]="updatedCatId">
                     <option *ngFor="let cat of categories" [value]="cat.idCat">
                         {{cat.nomCat}}
                     </option>
                 </select>
-            </div> -->
+            </div>
   
         <div class="mt-2"> 
             <button type="button" (click)="updateCombat()" class="btn btn-success">Modifier</button>

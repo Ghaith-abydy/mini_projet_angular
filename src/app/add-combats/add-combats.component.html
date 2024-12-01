@@ -3,7 +3,7 @@
       <h2>Ajouter un Combat :</h2>              
   </div> 
   <form>  
-      <div class="col-sm-2 col-md-2 col-lg-2"> 
+      <div hidden class="col-sm-2 col-md-2 col-lg-2"> 
           <label>ID Combat</label> 
           <input type="text" [(ngModel)]="newCombat.idCombat" name="idCombat" class="form-control"> 
       </div> 
@@ -35,7 +35,7 @@
 
 
 
-        <!-- <div class="col-sm-4 col-md-4 col-lg-4">
+        <div class="col-sm-4 col-md-4 col-lg-4">
             <label>Categorie</label>
             <select class="form-control form-control-lg" id="idCat" name="idCat" [(ngModel)]="newIdCat">
                 <option *ngFor="let cat of categories" [value]="cat.idCat">
@@ -48,6 +48,6 @@
             <div>
                 <h3>{{message}}</h3>
             </div> 
-        </div> -->
+        </div> 
   </form> 
 </div>

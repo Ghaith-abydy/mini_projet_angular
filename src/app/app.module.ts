@@ -7,7 +7,15 @@ import { CombatsComponent } from './combats/combats.component';
 import { AddCombatsComponent } from './add-combats/add-combats.component';
 import { FormsModule } from '@angular/forms';
 import { UpdateCombatComponent } from './update-combat/update-combat.component';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withFetch } from '@angular/common/http';
+import { RechercheParCategorieComponent } from './recherche-par-categorie/recherche-par-categorie.component';
+import { RechercheParNomComponent } from './recherche-par-nom/recherche-par-nom.component';
+import { SearchFilterPipe } from './search-filter.pipe';
+import { ListeCategoriesComponent } from './liste-categories/liste-categories.component';
+import { UpdateCategorieComponent } from './update-categorie/update-categorie.component';
+import { LoginComponent } from './login/login.component';
+import { ForbiddenComponent } from './forbidden/forbidden.component';
+
 
 
 @NgModule({
@@ -15,16 +23,23 @@ import { HttpClientModule } from '@angular/common/http';
     AppComponent,
     CombatsComponent,
     AddCombatsComponent,
-    UpdateCombatComponent
+    UpdateCombatComponent,
+    RechercheParCategorieComponent,
+    RechercheParNomComponent,
+    SearchFilterPipe,
+    ListeCategoriesComponent,
+    UpdateCategorieComponent,
+    LoginComponent,
+    ForbiddenComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
-    HttpClientModule  
+    FormsModule
   ],
   providers: [
-    provideClientHydration()
+    provideClientHydration(),
+    provideHttpClient(withFetch()) // Ajouter provideHttpClient ici
   ],
   bootstrap: [AppComponent]
 })
