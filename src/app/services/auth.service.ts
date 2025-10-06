@@ -20,10 +20,13 @@ export class AuthService {
   public roles!: string[];
   private helper = new JwtHelperService();
 
-
-  apiURL: string = 'http://localhost:8081/users';
   token!:string;
-  constructor(private router: Router,private http : HttpClient) { }
+  apiURL: string = 'http://localhost:8081/users';
+
+  public regitredUser : User = new User();
+  
+  constructor(private router: Router,
+              private http : HttpClient) { }
 
 
   login(user: User) {
@@ -45,6 +48,7 @@ export class AuthService {
       return;
     const decodedToken = this.helper.decodeToken(this.token);
     this.roles = decodedToken.roles;
+    console.log("roles: "+this.roles);
     this.loggedUser = decodedToken.sub;
   }
 
@@ -73,15 +77,37 @@ export class AuthService {
     return (this.roles.indexOf('ADMIN') > -1);
   }
 
+  // logout() {
+  //   this.isloggedIn = false;
+  //   this.loggedUser = undefined!;
+  //   this.roles = undefined!;
+  //   localStorage.removeItem('loggedUser');
+  //   localStorage.setItem('isloggedIn', String(this.isloggedIn));
+  //   this.router.navigate(['/login']);
+  // }
+
+
+
   logout() {
-    this.isloggedIn = false;
     this.loggedUser = undefined!;
     this.roles = undefined!;
-    localStorage.removeItem('loggedUser');
-    localStorage.setItem('isloggedIn', String(this.isloggedIn));
+    this.token= undefined!;
+    this.isloggedIn = false;
+    localStorage.removeItem('jwt');
     this.router.navigate(['/login']);
-  }
+    }
 
+    
+    loadToken() {
+      const storedToken = localStorage.getItem('jwt');
+      this.token = storedToken !== null ? storedToken : '';
+      this.decodeJWT();
+    }
+    
+  isTokenExpired(): Boolean {
+    return this.helper.isTokenExpired(this.token);
+  }
+     
 
   setLoggedUserFromLocalStorage(login: string) {
     this.loggedUser = login;
@@ -99,4 +125,21 @@ export class AuthService {
     });
   }
     */
+
+  registerUser(user :User){
+    return this.http.post<User>(this.apiURL+'/register', user,
+    {observe:'response'});
+    }
+
+
+setRegistredUser(user : User){
+this.regitredUser=user;
+}
+getRegistredUser(){
+return this.regitredUser;
+}
+
+validateEmail(code : string){
+  return this.http.get<User>(this.apiURL+'/verifyEmail/'+code);
+}
 }

@@ -3,9 +3,10 @@ import { AuthService } from './services/auth.service';
 import { Route, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css'],
+    standalone: false
 })
 export class AppComponent implements OnInit {
   title = 'MesCombats';
@@ -14,12 +15,15 @@ export class AppComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    let isloggedin = localStorage.getItem('isloggedIn');
-    let loggedUser = localStorage.getItem('loggedUser');
-    if (isloggedin != "true" || !loggedUser)
+    // let isloggedin = localStorage.getItem('isloggedIn');
+    // let loggedUser = localStorage.getItem('loggedUser');
+    // if (isloggedin != "true" || !loggedUser)
+    //   this.router.navigate(['/login']);
+    // else
+    //   this.authService.setLoggedUserFromLocalStorage(loggedUser);
+    if (this.authService.getToken() == null || this.authService.isTokenExpired())
       this.router.navigate(['/login']);
-    else
-      this.authService.setLoggedUserFromLocalStorage(loggedUser);
+
   }
  
 

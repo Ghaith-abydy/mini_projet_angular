@@ -4,11 +4,10 @@ import { CombatService } from '../services/combat.service';
 import { Categorie } from '../model/categorie.model';
 
 @Component({
-  selector: 'app-recherche-par-categorie',
-  templateUrl: './recherche-par-categorie.component.html',
-  styles: [
-    
-  ]
+    selector: 'app-recherche-par-categorie',
+    templateUrl: './recherche-par-categorie.component.html',
+    styles: [],
+    standalone: false
 })
 export class RechercheParCategorieComponent implements OnInit{
   IdCategorie! : number;

@@ -4,13 +4,15 @@ import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styles: ''
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    styles: '',
+    standalone: false
 })
 export class LoginComponent implements OnInit{
   user = new User();
   err : number = 0;
+  message : String ="login ou mot de passe erronés..";
 
   constructor(private authService: AuthService,
     private router: Router) { }
@@ -32,7 +34,11 @@ export class LoginComponent implements OnInit{
       this.router.navigate(['/']);
       },
       error: (err: any) => {
-      this.err = 1;
+        this.err = 1;
+        if(err.error.errorCause == "disabled"){
+          this.message = "L'utilisateur est désactivé !";
+        }
+          
       }
       });
        

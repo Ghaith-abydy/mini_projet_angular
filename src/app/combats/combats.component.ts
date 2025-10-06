@@ -4,8 +4,9 @@ import { CombatService } from '../services/combat.service';
 import { AuthService } from '../services/auth.service';
 
 @Component({
-  selector: 'app-combats',
-  templateUrl: './combats.component.html'
+    selector: 'app-combats',
+    templateUrl: './combats.component.html',
+    standalone: false
 })
 export class CombatsComponent implements OnInit {
   combats?: Combat[];

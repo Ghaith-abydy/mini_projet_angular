@@ -1,3 +1,4 @@
+
 import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 
@@ -5,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CombatsComponent } from './combats/combats.component';
 import { AddCombatsComponent } from './add-combats/add-combats.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UpdateCombatComponent } from './update-combat/update-combat.component';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { RechercheParCategorieComponent } from './recherche-par-categorie/recherche-par-categorie.component';
@@ -15,6 +16,10 @@ import { ListeCategoriesComponent } from './liste-categories/liste-categories.co
 import { UpdateCategorieComponent } from './update-categorie/update-categorie.component';
 import { LoginComponent } from './login/login.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
+import { RegisterComponent } from './register/register.component';
+import { VerifEmailComponent } from './verif-email/verif-email.component';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideToastr } from 'ngx-toastr';
 
 
 
@@ -30,16 +35,22 @@ import { ForbiddenComponent } from './forbidden/forbidden.component';
     ListeCategoriesComponent,
     UpdateCategorieComponent,
     LoginComponent,
-    ForbiddenComponent
+    ForbiddenComponent,
+    RegisterComponent,
+    VerifEmailComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     provideClientHydration(),
-    provideHttpClient(withFetch()) // Ajouter provideHttpClient ici
+    provideHttpClient(withFetch()),
+    provideAnimations(), // required animations providers
+    provideToastr(), // Toastr providers
+    
   ],
   bootstrap: [AppComponent]
 })

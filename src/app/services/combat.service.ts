@@ -54,9 +54,16 @@ export class CombatService {
   // ajouterCombat(comb: Combat) {
   //   this.combats.push(comb);
   // }
-  ajouterCombat(comb: Combat): Observable<Combat> {
-    return this.http.post<Combat>(apiURL, comb, httpOptions);
-  }
+  // ajouterCombat(comb: Combat): Observable<Combat> {
+  //   return this.http.post<Combat>(apiURL, comb, httpOptions);
+  // }
+
+  ajouterCombat( comb: Combat):Observable<Combat>{
+    let jwt = this.authService.getToken();
+    jwt = "Bearer "+jwt;
+    let httpHeaders = new HttpHeaders({"Authorization":jwt})
+    return this.http.post<Combat>(apiURL+"/addcomb", comb, {headers:httpHeaders});
+    }
 
   // supprimerCombat(comb: Combat) {
   //   const index = this.combats.indexOf(comb, 0);
@@ -64,18 +71,36 @@ export class CombatService {
   //     this.combats.splice(index, 1);
   //   }
   // }
+
+  // supprimerCombat(id: number) {
+  //   const url = `${apiURL}/${id}`;
+  //   return this.http.delete(url, httpOptions);
+  // }
   supprimerCombat(id: number) {
-    const url = `${apiURL}/${id}`;
-    return this.http.delete(url, httpOptions);
+    const url = `${apiURL}/delcomb/${id}`;
+    let jwt = this.authService.getToken();
+    jwt = "Bearer " + jwt;
+    let httpHeaders = new HttpHeaders({ "Authorization": jwt })
+    return this.http.delete(url, { headers: httpHeaders });
   }
+
 
   // consulterCombat(id:number): Combat{   
   //   return this.combats.find(c => c.idCombat == id)!;  
   // }
+
+  // consulterCombat(id: number): Observable<Combat> {
+  //   const url = `${apiURL}/${id}`;
+  //   return this.http.get<Combat>(url);
+  // }
   consulterCombat(id: number): Observable<Combat> {
-    const url = `${apiURL}/${id}`;
-    return this.http.get<Combat>(url);
-  }
+    const url = `${apiURL}/getbyid/${id}`;
+    let jwt = this.authService.getToken();
+    jwt = "Bearer "+jwt;
+    let httpHeaders = new HttpHeaders({"Authorization":jwt})
+    return this.http.get<Combat>(url,{headers:httpHeaders});
+    }
+
 
   // updateCombat(c :Combat) 
   //   { 
@@ -85,9 +110,16 @@ export class CombatService {
   //     this.trierCombats();
   //   }
 
-  updateCombat(comb: Combat): Observable<Combat> {
-    return this.http.put<Combat>(apiURL, comb, httpOptions);
-  }
+  // updateCombat(comb: Combat): Observable<Combat> {
+  //   return this.http.put<Combat>(apiURL, comb, httpOptions);
+  // }
+
+  updateCombat(prod :Combat) : Observable<Combat> {
+    let jwt = this.authService.getToken();
+    jwt = "Bearer "+jwt;
+    let httpHeaders = new HttpHeaders({"Authorization":jwt})
+    return this.http.put<Combat>(apiURL+"/updatecomb", prod, {headers:httpHeaders});
+    }
 
   trierCombats() {
     this.combats = this.combats.sort((n1, n2) => {
@@ -109,9 +141,16 @@ export class CombatService {
   //         return this.http.get<Categorie[]>(apiURL+"/cat"); 
   //       }
 
-  listeCategories(): Observable<CategorieWrapper> {
-    return this.http.get<CategorieWrapper>(this.apiURLCat);
-  }
+  // listeCategories(): Observable<CategorieWrapper> {
+  //   return this.http.get<CategorieWrapper>(this.apiURLCat);
+  // }
+  listeCategories():Observable<CategorieWrapper>{
+    let jwt = this.authService.getToken();
+    jwt = "Bearer "+jwt;
+    let httpHeaders = new HttpHeaders({"Authorization":jwt})
+    return this.http.get<CategorieWrapper>(this.apiURLCat,{headers:httpHeaders}
+    );
+  }    
 
   // consulterCategorie(id:number): Categorie{     
   //   return this.categories.find(cat => cat.idCat  == id)!; 
@@ -122,15 +161,22 @@ export class CombatService {
     return this.http.get<Combat[]>(url);
   }
 
+
   rechercherParNom(nom: string):Observable< Combat[]> { 
     const url = `${apiURL}/combsByName/${nom}`; 
     return this.http.get<Combat[]>(url); 
     }
+
+
+    
   
   
     ajouterCategorie( cat: Categorie):Observable<Categorie>{ 
       return this.http.post<Categorie>(this.apiURLCat, cat, httpOptions); 
       }
+
+
+
 }
 
 

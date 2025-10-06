@@ -3,9 +3,10 @@ import { Combat } from '../model/combat.model';
 import { CombatService } from '../services/combat.service';
 
 @Component({
-  selector: 'app-recherche-par-nom',
-  templateUrl: './recherche-par-nom.component.html',
-  styles: ``
+    selector: 'app-recherche-par-nom',
+    templateUrl: './recherche-par-nom.component.html',
+    styles: ``,
+    standalone: false
 })
 export class RechercheParNomComponent implements OnInit{
   nomj1! : string;

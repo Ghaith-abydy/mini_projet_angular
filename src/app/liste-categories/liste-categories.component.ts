@@ -3,9 +3,10 @@ import { CombatService } from '../services/combat.service';
 import { Categorie } from '../model/categorie.model';
 
 @Component({
-  selector: 'app-liste-categories',
-  templateUrl: './liste-categories.component.html',
-  styles: ``
+    selector: 'app-liste-categories',
+    templateUrl: './liste-categories.component.html',
+    styles: ``,
+    standalone: false
 })
 export class ListeCategoriesComponent implements OnInit{
   categories! : Categorie[];

@@ -5,8 +5,9 @@ import { Categorie } from '../model/categorie.model';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-add-combats',
-  templateUrl: './add-combats.component.html'
+    selector: 'app-add-combats',
+    templateUrl: './add-combats.component.html',
+    standalone: false
 })
 export class AddCombatsComponent implements OnInit {
   newCombat = new Combat();

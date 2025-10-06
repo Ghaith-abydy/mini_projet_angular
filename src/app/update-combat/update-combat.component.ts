@@ -5,9 +5,10 @@ import { Combat } from '../model/combat.model';
 import { Categorie } from '../model/categorie.model';
 
 @Component({
-  selector: 'app-update-combat',
-  templateUrl: './update-combat.component.html',
-  styles: ``
+    selector: 'app-update-combat',
+    templateUrl: './update-combat.component.html',
+    styles: ``,
+    standalone: false
 })
 export class UpdateCombatComponent implements OnInit {
   currentCombat  = new Combat();
